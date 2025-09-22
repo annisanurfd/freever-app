@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard 2 Tab</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>Dashboard dengan 2 Tab</h2>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="form">Form Input</div>
+    <div class="tab" data-tab="tabel">Tabel Data</div>
+  </div>
+
+  <!-- Tab 1: Form -->
+  <div id="form" class="tab-content">
+    <h3>Form Input Data</h3>
+    <form id="dataForm">
+      <label>Nama: </label><br>
+      <input type="text" id="nama" required><br><br>
+
+      <label>Umur: </label><br>
+      <input type="number" id="umur" required><br><br>
+
+      <label>Alamat: </label><br>
+      <input type="text" id="alamat" required><br><br>
+
+      <button type="submit">Simpan</button>
+    </form>
+  </div>
+
+  <!-- Tab 2: Tabel -->
+  <div id="tabel" class="tab-content" style="display:none;">
+    <h3>Data yang Sudah Dientri</h3>
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Umur</th>
+          <th>Alamat</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
