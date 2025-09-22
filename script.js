@@ -1,58 +1,55 @@
-// --- Tab Switcher ---
-const tabs = document.querySelectorAll(".tab");
-const contents = document.querySelectorAll(".tab-content");
+const formSection = document.getElementById("formSection");
+const tableSection = document.getElementById("tableSection");
+const patientForm = document.getElementById("patientForm");
+const tableBody = document.querySelector("#patientTable tbody");
 
-tabs.forEach(tab => {
-  tab.addEventListener("click", () => {
-    tabs.forEach(t => t.classList.remove("active"));
-    contents.forEach(c => c.style.display = "none");
+let patients = [];
 
-    tab.classList.add("active");
-    document.getElementById(tab.dataset.tab).style.display = "block";
-  });
-});
+// Toggle View
+function showForm() {
+  formSection.style.display = "block";
+  tableSection.style.display = "none";
+}
+function showTable() {
+  formSection.style.display = "none";
+  tableSection.style.display = "block";
+}
 
-// --- Data Handling ---
-const form = document.getElementById("dataForm");
-const tableBody = document.querySelector("#dataTable tbody");
-
-let data = [];
-
-form.addEventListener("submit", function(e) {
+// Save Patient Data
+patientForm.addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const nama = document.getElementById("nama").value;
-  const umur = document.getElementById("umur").value;
-  const alamat = document.getElementById("alamat").value;
+  const name = document.getElementById("name").value;
+  const dob = document.getElementById("dob").value;
+  const age = document.getElementById("age").value;
+  const gender = document.querySelector("input[name='gender']:checked").value;
 
-  data.push({ nama, umur, alamat });
+  patients.push({ name, dob, age, gender });
   renderTable();
 
-  form.reset();
-  tabs[1].click(); // otomatis pindah ke tab tabel
+  patientForm.reset();
+  showTable();
 });
 
+// Render Table
 function renderTable() {
   tableBody.innerHTML = "";
-  data.forEach((row, index) => {
-    const tr = document.createElement("tr");
-
-    tr.innerHTML = `
-      <td contenteditable="true" onblur="updateData(${index}, 'nama', this.innerText)">${row.nama}</td>
-      <td contenteditable="true" onblur="updateData(${index}, 'umur', this.innerText)">${row.umur}</td>
-      <td contenteditable="true" onblur="updateData(${index}, 'alamat', this.innerText)">${row.alamat}</td>
-      <td><button onclick="deleteRow(${index})">Hapus</button></td>
+  patients.forEach((p, index) => {
+    const row = `
+      <tr>
+        <td>${p.name}</td>
+        <td>${p.dob}</td>
+        <td>${p.age}</td>
+        <td>${p.gender}</td>
+        <td><button onclick="deletePatient(${index})">Delete</button></td>
+      </tr>
     `;
-
-    tableBody.appendChild(tr);
+    tableBody.innerHTML += row;
   });
 }
 
-function updateData(index, field, value) {
-  data[index][field] = value;
-}
-
-function deleteRow(index) {
-  data.splice(index, 1);
+// Delete Patient
+function deletePatient(index) {
+  patients.splice(index, 1);
   renderTable();
 }

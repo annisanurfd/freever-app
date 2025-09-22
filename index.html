@@ -2,49 +2,68 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard 2 Tab</title>
+  <title>Dashboard Freever Clone</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h2>Dashboard dengan 2 Tab</h2>
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2 class="logo">Dashboard</h2>
+    <ul>
+      <li><button onclick="showForm()">➕ New Assessment</button></li>
+      <li><button onclick="showTable()">📋 Patient Records</button></li>
+    </ul>
+  </aside>
 
-  <div class="tabs">
-    <div class="tab active" data-tab="form">Form Input</div>
-    <div class="tab" data-tab="tabel">Tabel Data</div>
-  </div>
+  <!-- Main Content -->
+  <main class="content">
+    <!-- Header -->
+    <header>
+      <h1>Freever 🩺</h1>
+      <p>Clinical Decision Support for Fever Diagnosis</p>
+    </header>
 
-  <!-- Tab 1: Form -->
-  <div id="form" class="tab-content">
-    <h3>Form Input Data</h3>
-    <form id="dataForm">
-      <label>Nama: </label><br>
-      <input type="text" id="nama" required><br><br>
+    <!-- Form Section -->
+    <section id="formSection" class="card">
+      <h3>Step 0: Patient Information</h3>
+      <p>Enter the patient's personal data</p>
+      <form id="patientForm">
+        <label>Patient Name</label>
+        <input type="text" id="name" placeholder="e.g., Alex" required>
 
-      <label>Umur: </label><br>
-      <input type="number" id="umur" required><br><br>
+        <label>Date of Birth</label>
+        <input type="date" id="dob" required>
 
-      <label>Alamat: </label><br>
-      <input type="text" id="alamat" required><br><br>
+        <label>Age (years)</label>
+        <input type="number" id="age" placeholder="e.g., 35" required>
 
-      <button type="submit">Simpan</button>
-    </form>
-  </div>
+        <label>Gender</label>
+        <div class="gender">
+          <label><input type="radio" name="gender" value="Male" required> Male</label>
+          <label><input type="radio" name="gender" value="Female"> Female</label>
+        </div>
 
-  <!-- Tab 2: Tabel -->
-  <div id="tabel" class="tab-content" style="display:none;">
-    <h3>Data yang Sudah Dientri</h3>
-    <table id="dataTable">
-      <thead>
-        <tr>
-          <th>Nama</th>
-          <th>Umur</th>
-          <th>Alamat</th>
-          <th>Aksi</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
+        <button type="submit">Save</button>
+      </form>
+    </section>
+
+    <!-- Table Section -->
+    <section id="tableSection" class="card" style="display:none;">
+      <h3>Patient Records</h3>
+      <table id="patientTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>DOB</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
 
   <script src="script.js"></script>
 </body>
